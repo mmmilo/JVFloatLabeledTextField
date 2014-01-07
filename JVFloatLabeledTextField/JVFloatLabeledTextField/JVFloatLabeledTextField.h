@@ -27,8 +27,9 @@
 
 
 #import <UIKit/UIKit.h>
+#import <CoconutKit/HLSTextField.h>
 
-@interface JVFloatLabeledTextField : UITextField
+@interface JVFloatLabeledTextField : HLSTextField
 
 @property (nonatomic, strong, readonly) UILabel * floatingLabel;
 @property (nonatomic, strong) NSNumber * floatingLabelYPadding UI_APPEARANCE_SELECTOR;

@@ -131,6 +131,10 @@
     }
 }
 
+- (BOOL)containsText {
+  return (self.text && 0 < [self.text length]);
+}
+
 - (void)setLabelOriginForTextAlignment
 {
     CGFloat originX = _floatingLabel.frame.origin.x;
@@ -158,12 +162,22 @@
 
 - (CGRect)textRectForBounds:(CGRect)bounds
 {
+  if ([self containsText]) {
     return UIEdgeInsetsInsetRect([super textRectForBounds:bounds], UIEdgeInsetsMake(ceilf(_floatingLabel.font.lineHeight+_floatingLabelYPadding.floatValue), 0.0f, 0.0f, 0.0f));
+  }
+  else {
+    return [super textRectForBounds:bounds];
+  }
 }
 
 - (CGRect)editingRectForBounds:(CGRect)bounds
 {
+  if ([self containsText]) {
     return UIEdgeInsetsInsetRect([super editingRectForBounds:bounds], UIEdgeInsetsMake(ceilf(_floatingLabel.font.lineHeight+_floatingLabelYPadding.floatValue), 0.0f, 0.0f, 0.0f));
+  }
+  else {
+    return [super textRectForBounds:bounds];
+  }
 }
 
 - (CGRect)clearButtonRectForBounds:(CGRect)bounds
@@ -192,7 +206,7 @@
     
     BOOL firstResponder = self.isFirstResponder;
     _floatingLabel.textColor = (firstResponder && self.text && self.text.length > 0 ? self.getLabelActiveColor : self.floatingLabelTextColor);
-    if (!self.text || 0 == [self.text length]) {
+    if (![self containsText]) {
         [self hideFloatingLabel:firstResponder];
     }
     else {

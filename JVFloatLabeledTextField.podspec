@@ -9,6 +9,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/jverdi/JVFloatLabeledTextField.git", :tag => s.version.to_s }
   s.platform     = :ios
   s.source_files = 'JVFloatLabeledTextField/JVFloatLabeledTextField/*.{h,m}'
+  s.dependency 'CoconutKit'
   s.frameworks   = 'Foundation', 'UIKit'
   s.requires_arc = true
 end
